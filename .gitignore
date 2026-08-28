@@ -4,3 +4,7 @@ sensor_monitor
 sensorClassifier
 sensorGrid
 resetSensor
+pre
+const
+drone_navigation
+parser
