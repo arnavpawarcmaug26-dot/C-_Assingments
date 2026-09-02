@@ -98,6 +98,7 @@ public:
     }
 
     double computeAllowances() const {
+
         if (grade == 'A') {
             return basicSalary * 0.40;
         }
@@ -117,6 +118,7 @@ public:
     }
 
     double computeTax() const {
+
         double gross = computeGrossSalary();
 
         if (gross <= 50000) {
@@ -135,7 +137,9 @@ public:
     }
 
     void printPayslip() const {
+
         cout << endl;
+
         cout << "============================================" << endl;
         cout << "         EMPLOYEE PAYSLIP - AUG 2026        " << endl;
         cout << "============================================" << endl;
@@ -144,12 +148,15 @@ public:
         cout << "Name          : " << name << endl;
         cout << "Department    : " << department << endl;
         cout << "Grade         : " << grade << endl;
+
         cout << "Status        : "
-             << (isActive ? "Active" : "Inactive") << endl;
+             << (isActive ? "Active" : "Inactive")
+             << endl;
 
         cout << "--------------------------------------------" << endl;
 
-        cout << "Basic Salary  : Rs. " << basicSalary << endl;
+        cout << "Basic Salary  : Rs. "
+             << basicSalary << endl;
 
         int allowancePercent;
 
@@ -184,6 +191,7 @@ public:
     }
 
     void acceptDetails() {
+
         string inputName;
         string inputDepartment;
         char inputGrade;
@@ -192,21 +200,54 @@ public:
         cout << "\nEnter employee details for Employee ID "
              << empId << endl;
 
-        cout << "Enter name: ";
-        getline(cin >> ws, inputName);
-        setName(inputName);
 
-        cout << "Enter department: ";
-        getline(cin, inputDepartment);
-        setDepartment(inputDepartment);
 
-        cout << "Enter grade: ";
-        cin >> inputGrade;
-        setGrade(inputGrade);
+        do {
+            cout << "Enter name: ";
+            getline(cin >> ws, inputName);
 
-        cout << "Enter basic salary: ";
-        cin >> inputSalary;
-        setBasicSalary(inputSalary);
+            setName(inputName);
+
+        } while (inputName.empty());
+
+
+
+
+        do {
+            cout << "Enter department: ";
+            getline(cin, inputDepartment);
+
+            setDepartment(inputDepartment);
+
+        } while (inputDepartment != "Engineering" &&
+                 inputDepartment != "HR" &&
+                 inputDepartment != "Finance" &&
+                 inputDepartment != "Operations");
+
+
+
+        do {
+            cout << "Enter grade: ";
+            cin >> inputGrade;
+
+            setGrade(inputGrade);
+
+        } while (inputGrade != 'A' &&
+                 inputGrade != 'B' &&
+                 inputGrade != 'C' &&
+                 inputGrade != 'D');
+
+
+
+
+        do {
+            cout << "Enter basic salary: ";
+            cin >> inputSalary;
+
+            setBasicSalary(inputSalary);
+
+        } while (inputSalary <= 10000 ||
+                 inputSalary >= 500000);
     }
 };
 
@@ -229,22 +270,28 @@ int main() {
     // e1.empId = 999;
     // e1.basicSalary = -1000;
 
+
     e1.printPayslip();
     e2->printPayslip();
     e3->printPayslip();
 
-   
+
+    // Simulate a resignation
+
     e3->deactivate();
 
     if (!e3->getIsActive()) {
+
         cout << e3->getName()
              << " is no longer active. Payroll skipped."
              << endl;
     }
 
+
     cout << "Total Employees : "
          << Employee::getEmployeeCount()
          << endl;
+
 
     delete e2;
     delete e3;
