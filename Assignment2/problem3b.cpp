@@ -34,7 +34,7 @@ int main(){
 
     int currentHealth = -15;
     int cappedHealth = GameMath::clamp(currentHealth, 0, 100);
-    std::cout << "Capped Health: " << cappedHealth << endl;
+    cout << "Capped Health: " << cappedHealth << endl;
 
     using namespace GameMath;
 
